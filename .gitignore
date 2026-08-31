@@ -1,0 +1,19 @@
+# Dependencies and generated build output
+node_modules/
+.pnpm-store/
+dist/
+
+# Local development diagnostics
+*.log
+
+# Only the map viewer source and its deployment workflow are committed.
+# Other materials that happen to share this workspace remain local.
+_react-portfolio-backup/
+_report_review_sona_moon/
+before/
+tmp/
+海报+AIGC+视频+书籍作品/
+一/
+public/
+IP.png
+~$*.docx
