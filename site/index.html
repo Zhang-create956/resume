@@ -73,6 +73,29 @@
     .detail-list { display: grid; gap: 10px; margin: 17px 0 0; padding: 0; list-style: none; }
     .detail-list li { display: flex; gap: 10px; align-items: baseline; padding: 11px 13px; background: #f4f8fc; border-left: 3px solid var(--blue); border-radius: 0 9px 9px 0; }
     .detail-list b { color: var(--ink); min-width: 72px; }
+    .experience-intro { margin-bottom: 22px !important; color: #4a5667; }
+    .experience-list { position: relative; display: grid; gap: 0; margin: 4px 0 0; padding: 0 0 0 20px; }
+    .experience-list::before { content: ""; position: absolute; left: 3px; top: 7px; bottom: 28px; width: 1px; background: linear-gradient(var(--blue), rgba(22,141,233,.12)); }
+    .experience-entry { position: relative; padding: 0 0 29px 20px; }
+    .experience-entry::before { content: ""; position: absolute; left: -23px; top: 7px; width: 10px; height: 10px; border: 3px solid #fff; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 2px rgba(22,141,233,.26); }
+    .experience-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; color: var(--blue-deep); font-size: 12px; font-weight: 800; letter-spacing: .045em; }
+    .experience-tag { flex: 0 0 auto; padding: 3px 7px; border: 1px solid rgba(22,141,233,.32); border-radius: 999px; color: #246493; background: #f1f8fe; font-size: 10px; letter-spacing: .02em; }
+    .experience-entry h3 { margin: 0; color: var(--ink); font-size: 19px; letter-spacing: -.025em; line-height: 1.35; }
+    .experience-role { margin: 4px 0 9px; color: #1f77b5; font-size: 14px; font-weight: 750; }
+    .experience-summary { margin: 0 0 10px; color: #475365; font-size: 13px; line-height: 1.7; }
+    .experience-bullets { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+    .experience-bullets li { position: relative; padding-left: 13px; color: #3d4858; font-size: 13px; line-height: 1.65; }
+    .experience-bullets li::before { content: ""; position: absolute; top: .68em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin-top: 14px; }
+    .metric { min-width: 0; padding: 9px 8px; border-top: 2px solid var(--blue); background: #f4f9fd; }
+    .metric strong { display: block; overflow: hidden; color: var(--ink); font-size: 14px; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+    .metric span { display: block; margin-top: 4px; color: #5d6b7b; font-size: 10px; line-height: 1.3; }
+    .growth-section { margin: -5px 0 26px 20px; padding: 16px; border: 1px solid #deebf5; border-radius: 12px; background: linear-gradient(135deg, #f9fcff, #f2f8fd); }
+    .growth-section h4 { margin: 0 0 10px; color: var(--ink); font-size: 14px; }
+    .growth-table { display: grid; border-top: 1px solid #dce8f1; }
+    .growth-row { display: grid; grid-template-columns: 82px 1.45fr 1.1fr; gap: 10px; padding: 9px 0; border-bottom: 1px solid #e2edf5; color: #465366; font-size: 12px; line-height: 1.45; }
+    .growth-row:last-child { border-bottom: 0; }
+    .growth-row b { color: var(--blue-deep); }
 
     @media (max-width: 700px) {
       .skip { top: 14px; right: 14px; padding: 8px 13px; font-size: 12px; }
@@ -81,6 +104,14 @@
       .modal-backdrop { padding: 14px; }
       .modal-header { padding: 21px 20px 13px; }
       .modal-content { padding: 18px 20px 24px; font-size: 14px; }
+      .experience-list { padding-left: 16px; }
+      .experience-entry { padding-left: 17px; }
+      .experience-entry::before { left: -19px; }
+      .experience-meta { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .growth-section { margin-left: 16px; padding: 13px; }
+      .growth-row { grid-template-columns: 58px 1fr; gap: 6px 10px; }
+      .growth-row span:last-child { grid-column: 2; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; } }
   </style>
@@ -152,7 +183,52 @@
         '04': document.getElementById('visual04')
       };
       const details = {
-        '01': { kicker: '01 / 项目经历', title: '项目经历', intro: '此处为占位内容，待用户替换为真实简历内容。建议用“项目名称—职责—成果”的结构，突出你在协作、交付和解决问题中的价值。', items: [['项目名称', '待替换：项目名称与所属组织'], ['核心职责', '待替换：关键工作与负责范围'], ['成果数据', '待替换：量化成果或影响力']] },
+        '01': {
+          kicker: '01 / 个人经历',
+          title: '实习经历',
+          intro: '两段实习经历覆盖跨境电商与海外娱乐社交产品运营，围绕用户、内容、活动、数据与履约等模块积累实践。',
+          experiences: [
+            {
+              period: '2026.03 — 2026.08',
+              company: '同风科技',
+              role: 'Etsy运营助理（实习）',
+              category: '跨境电商 · Etsy 店铺运营',
+              summary: '从订单履约与客服开始，逐步负责商品前端、上新、广告及周度数据复盘，完成从店铺执行到运营优化的完整闭环。',
+              bullets: [
+                '首月系统熟悉产品、材质尺寸、定制规则及生产交付流程，独立完成订单审核、定制确认、制单、生产对接、物流跟踪和售后；整理客服FAQ、标准回复及制单检查清单。',
+                '第2—3个月接手店铺前端运营，优化Listing标题、Tags、主副图、视频、定制说明、商品选项、价格及物流信息；针对曝光、点击、转化与误选问题，迭代主图、场景图、选项结构与交期说明。',
+                '参与新品从市场调研、竞品分析、产品定位、视觉素材制作、链接上架到数据复盘的完整流程；结合搜索词、访问量、收藏量、订单量和销售额判断产品潜力，开发礼赠、儿童用品及宠物情感定制等场景化产品。',
+                '参与Etsy广告和促销运营，按新品、潜力款、主力款和低效款进行广告分层；跟踪曝光、点击率、CPC、订单、广告收入及ROAS，关闭高花费低产出投放，并测试收藏优惠、加购挽回和老客优惠。',
+                '建立周度数据复盘机制，综合分析Visits、Orders、Conversion Rate、客单价、广告订单占比及自然订单表现；根据客服咨询、差评和售后记录优化购买说明、定制确认及异常订单处理。'
+              ],
+              metrics: [
+                ['570.2K', '广告曝光'], ['13.5K', '广告点击'], ['1,528', '广告订单'], ['US$44.5K', '广告归因收入'], ['4.47', 'ROAS'], ['3,132', '维护期订单'], ['4.9', '平均评分'], ['0%', 'Case rate']
+              ],
+              growth: [
+                ['第1个月', '熟悉产品、定制制单、客服和售后', '响应率、错单率、退款率、Case rate'],
+                ['第2个月', '维护Listing、整理搜索词和客户问题', '曝光量、点击率、收藏率'],
+                ['第3个月', '上新、制作场景图、测试主图和选项', '访问量、订单量、转化率'],
+                ['第4个月', '接手广告预算和低效链接优化', 'CPC、广告订单、ROAS'],
+                ['第5个月', '优化价格、运费、优惠和购买流程', '客单价、转化率、广告费率'],
+                ['第6个月', '独立复盘前端运营并协同履约', '销售额、自然订单、评分、发货率']
+              ]
+            },
+            {
+              period: '2025.08 — 2025.11',
+              company: '深圳趣虹科技有限公司',
+              role: '海外产品运营实习生（You Star）',
+              category: '海外娱乐社交产品 · 用户增长',
+              summary: '负责海外娱乐社交产品的用户运营、活动策划、生态维护及增长策略落地，聚焦用户活跃、留存与付费转化，并通过数据复盘与资源投放研判优化运营体系。',
+              bullets: [
+                '竞品与用户调研：每月完成40—50款海外社交、语音互动、娱乐社区类产品的深度拆解，输出万字以上图文调研报告，提炼行业玩法、用户偏好与产品亮点，为内部产品优化和运营迭代提供依据。',
+                '数据与策略支撑：协助搭建平台钻石流水、礼物价值专项台账，按月梳理活动奖励、礼物收支、用户消费等核心数据，为运营策略调整和资源投放优化提供数据支撑。',
+                '产品协同优化：整合竞品优势、用户反馈及运营数据，输出可落地的活动策划、资源配置、用户体验优化建议；相关报告获部门认可，并应用于后续项目方案研讨与迭代。',
+                '流程体系沉淀：参与实习工作SOP的梳理与优化，规范资源运营、数据统计、奖励发放等核心流程节点，减少跨团队重复沟通与人工疏漏，提升团队协作效率与工作标准化程度。'
+              ],
+              metrics: []
+            }
+          ]
+        },
         '02': { kicker: '02 / 技能特长', title: '技能特长', intro: '此处为占位内容，待用户替换为真实简历内容。可按“专业能力、工具栈、协作方式”梳理个人核心竞争力。', items: [['专业能力', '待替换：设计、运营、研究或技术能力'], ['工具栈', '待替换：熟练软件、平台或语言'], ['协作方式', '待替换：跨团队项目经验']] },
         '03': { kicker: '03 / 教育背景', title: '教育背景', intro: '此处为占位内容，待用户替换为真实简历内容。可添加学校、专业、时间、荣誉或与目标岗位相关的课程成果。', items: [['学校 / 专业', '待替换：学校、院系与专业'], ['学习时间', '待替换：入学与毕业时间'], ['代表成果', '待替换：奖项、论文或课程项目']] },
         '04': { kicker: '04 / 联系方式', title: '联系方式', intro: '此处为占位内容，待用户替换为真实简历内容。发布到公开站点前，请确认是否需要展示手机号、邮箱等个人信息。', items: [['邮箱', '待替换：your.name@example.com'], ['所在地', '待替换：城市 / 意向城市'], ['其他链接', '待替换：作品集、GitHub 或社交主页']] }
@@ -211,6 +287,41 @@
         modalTitle.textContent = item.title;
         modalContent.replaceChildren();
         const rule = document.createElement('div'); rule.className = 'rule';
+        modalContent.append(rule);
+
+        if (item.experiences) {
+          const intro = document.createElement('p'); intro.className = 'experience-intro'; intro.textContent = item.intro;
+          const timeline = document.createElement('div'); timeline.className = 'experience-list';
+          item.experiences.forEach(experience => {
+            const entry = document.createElement('article'); entry.className = 'experience-entry';
+            const meta = document.createElement('div'); meta.className = 'experience-meta';
+            const period = document.createElement('span'); period.textContent = experience.period;
+            const tag = document.createElement('span'); tag.className = 'experience-tag'; tag.textContent = experience.category;
+            meta.append(period, tag);
+            const company = document.createElement('h3'); company.textContent = experience.company;
+            const role = document.createElement('p'); role.className = 'experience-role'; role.textContent = experience.role;
+            const summary = document.createElement('p'); summary.className = 'experience-summary'; summary.textContent = experience.summary;
+            const bullets = document.createElement('ul'); bullets.className = 'experience-bullets';
+            experience.bullets.forEach(text => { const bullet = document.createElement('li'); bullet.textContent = text; bullets.append(bullet); });
+            entry.append(meta, company, role, summary, bullets);
+            if (experience.metrics?.length) {
+              const metrics = document.createElement('div'); metrics.className = 'metric-grid';
+              experience.metrics.forEach(([value, label]) => { const metric = document.createElement('div'); metric.className = 'metric'; const strong = document.createElement('strong'); strong.textContent = value; const caption = document.createElement('span'); caption.textContent = label; metric.append(strong, caption); metrics.append(metric); });
+              entry.append(metrics);
+            }
+            timeline.append(entry);
+            if (experience.growth?.length) {
+              const growth = document.createElement('section'); growth.className = 'growth-section';
+              const heading = document.createElement('h4'); heading.textContent = '六个月成长逻辑';
+              const table = document.createElement('div'); table.className = 'growth-table';
+              experience.growth.forEach(([month, work, metrics]) => { const row = document.createElement('div'); row.className = 'growth-row'; const stage = document.createElement('b'); stage.textContent = month; const workText = document.createElement('span'); workText.textContent = work; const metricText = document.createElement('span'); metricText.textContent = metrics; row.append(stage, workText, metricText); table.append(row); });
+              growth.append(heading, table); timeline.append(growth);
+            }
+          });
+          modalContent.append(intro, timeline);
+          return;
+        }
+
         const paragraph = document.createElement('p'); paragraph.textContent = item.intro;
         const list = document.createElement('ul'); list.className = 'detail-list';
         item.items.forEach(([label, value]) => {
@@ -219,7 +330,7 @@
           const text = document.createElement('span'); text.textContent = value;
           row.append(strong, text); list.append(row);
         });
-        modalContent.append(rule, paragraph, list);
+        modalContent.append(paragraph, list);
       }
 
       function openModal(key, trigger) {
