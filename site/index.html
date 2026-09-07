@@ -60,7 +60,7 @@
 
     .modal-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 22px; background: rgba(3, 7, 14, .68); opacity: 0; pointer-events: none; transition: opacity 270ms ease; }
     .modal-backdrop.is-open { opacity: 1; pointer-events: auto; }
-    .modal { width: min(560px, 100%); max-height: min(720px, calc(100dvh - 44px)); overflow: auto; position: relative; background: rgba(253,253,252,.98); border: 1px solid rgba(255,255,255,.75); border-radius: var(--radius); box-shadow: 0 28px 90px rgba(0,0,0,.45); transform: translateY(18px) scale(.965); opacity: 0; transition: transform 310ms var(--ease), opacity 310ms var(--ease); }
+    .modal { width: min(1440px, 80vw); max-height: min(720px, calc(100dvh - 44px)); overflow: auto; position: relative; background: rgba(253,253,252,.98); border: 1px solid rgba(255,255,255,.75); border-radius: var(--radius); box-shadow: 0 28px 90px rgba(0,0,0,.45); transform: translateY(18px) scale(.965); opacity: 0; transition: transform 310ms var(--ease), opacity 310ms var(--ease); }
     .modal-backdrop.is-open .modal { transform: translateY(0) scale(1); opacity: 1; }
     .modal-header { display: flex; align-items: start; justify-content: space-between; padding: 25px 27px 15px; border-bottom: 1px solid #e5e8ed; }
     .modal-kicker { margin: 0 0 6px; color: var(--blue-deep); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
@@ -116,6 +116,7 @@
       .modal-backdrop { padding: 14px; }
       .modal-header { padding: 21px 20px 13px; }
       .modal-content { padding: 18px 20px 24px; font-size: 14px; }
+      .modal { width: 100%; }
       .experience-list { padding-left: 16px; }
       .experience-entry { padding-left: 17px; }
       .experience-entry::before { left: -19px; }
