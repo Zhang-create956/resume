@@ -74,6 +74,18 @@
     .detail-list li { display: flex; gap: 10px; align-items: baseline; padding: 11px 13px; background: #f4f8fc; border-left: 3px solid var(--blue); border-radius: 0 9px 9px 0; }
     .detail-list b { color: var(--ink); min-width: 72px; }
     .experience-intro { margin-bottom: 22px !important; color: #4a5667; }
+    .education-section { margin: 0 0 25px; padding: 16px; border-left: 3px solid var(--blue); background: linear-gradient(135deg, #f8fcff, #eff7fd); }
+    .resume-section-heading { display: flex; align-items: center; gap: 9px; margin: 0 0 12px; color: var(--ink); font-size: 15px; }
+    .resume-section-heading::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px rgba(22,141,233,.12); }
+    .education-list { display: grid; gap: 16px; }
+    .education-entry { padding-top: 14px; border-top: 1px solid #dce9f3; }
+    .education-entry:first-child { padding-top: 0; border-top: 0; }
+    .education-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; color: var(--blue-deep); font-size: 12px; font-weight: 800; letter-spacing: .04em; }
+    .education-entry h3 { margin: 5px 0 2px; color: var(--ink); font-size: 18px; letter-spacing: -.02em; }
+    .education-degree { margin: 0 0 9px; color: #2478b7; font-size: 13px; font-weight: 750; }
+    .education-facts { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+    .education-fact { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px; color: #455365; font-size: 12px; line-height: 1.6; }
+    .education-fact b { color: #1e6ba5; font-weight: 800; }
     .experience-list { position: relative; display: grid; gap: 0; margin: 4px 0 0; padding: 0 0 0 20px; }
     .experience-list::before { content: ""; position: absolute; left: 3px; top: 7px; bottom: 28px; width: 1px; background: linear-gradient(var(--blue), rgba(22,141,233,.12)); }
     .experience-entry { position: relative; padding: 0 0 29px 20px; }
@@ -185,9 +197,29 @@
       const details = {
         '01': {
           kicker: '01 / 个人经历',
-          title: '实习经历',
+          title: '教育与实习经历',
           intro: '两段实习经历覆盖跨境电商与海外娱乐社交产品运营，围绕用户、内容、活动、数据与履约等模块积累实践。',
-          experiences: [
+          education: [
+            {
+              period: '2024.09 — 至今',
+              school: '深圳大学',
+              degree: '建筑专硕（3年制）研究生',
+              facts: [
+                ['主修课程', '建筑设计（91分）、环境与行为研究专题（85分）等'],
+                ['学业成果', 'GPA 3.6/4.0，专业排名前10%，荣获研究生一等奖学金'],
+                ['校园工作', '担任研究生第三党支部副书记，统筹支部党员发展、党会组织等核心工作，规范支部标准化工作流程，有效提升支部组织生活开展效率；高效协调支部内外部资源，落地各项党建工作任务，扎实锻炼统筹规划、组织管理与跨场景沟通协调能力。']
+              ]
+            },
+            {
+              period: '2019.09 — 2024.06',
+              school: '武汉科技大学',
+              degree: '建筑学（5年制）本科',
+              facts: [
+                ['学业成果', 'GPA 3.6/4.0，在校五年持续稳居专业前10%，历年均斩获校级一、二等奖学金，顺利通过大学英语四六级考试'],
+                ['校园工作', '任职建筑模型协会会长，牵头策划落地80+人规模手工建模主题活动，负责12+场线下专业活动的全流程统筹，涵盖资源对接、成本管控、财务报账、活动落地等核心工作；在提升协会成员专业实践能力的同时，积累了活动策划、团队管理与成本把控经验。']
+              ]
+            }
+          ],          experiences: [
             {
               period: '2026.03 — 2026.08',
               company: '同风科技',
@@ -291,6 +323,22 @@
 
         if (item.experiences) {
           const intro = document.createElement('p'); intro.className = 'experience-intro'; intro.textContent = item.intro;
+          modalContent.append(intro);
+          if (item.education?.length) {
+            const education = document.createElement('section'); education.className = 'education-section';
+            const heading = document.createElement('h3'); heading.className = 'resume-section-heading'; heading.textContent = '教育背景';
+            const educationList = document.createElement('div'); educationList.className = 'education-list';
+            item.education.forEach(record => {
+              const entry = document.createElement('article'); entry.className = 'education-entry';
+              const meta = document.createElement('div'); meta.className = 'education-meta'; meta.textContent = record.period;
+              const school = document.createElement('h3'); school.textContent = record.school;
+              const degree = document.createElement('p'); degree.className = 'education-degree'; degree.textContent = record.degree;
+              const facts = document.createElement('ul'); facts.className = 'education-facts';
+              record.facts.forEach(([label, value]) => { const fact = document.createElement('li'); fact.className = 'education-fact'; const term = document.createElement('b'); term.textContent = label; const detail = document.createElement('span'); detail.textContent = value; fact.append(term, detail); facts.append(fact); });
+              entry.append(meta, school, degree, facts); educationList.append(entry);
+            });
+            education.append(heading, educationList); modalContent.append(education);
+          }
           const timeline = document.createElement('div'); timeline.className = 'experience-list';
           item.experiences.forEach(experience => {
             const entry = document.createElement('article'); entry.className = 'experience-entry';
@@ -318,7 +366,7 @@
               growth.append(heading, table); timeline.append(growth);
             }
           });
-          modalContent.append(intro, timeline);
+          modalContent.append(timeline);
           return;
         }
 
