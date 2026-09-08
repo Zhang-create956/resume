@@ -321,6 +321,8 @@
         'aipin-full-04': { src: 'assets/images/drawings/aipin-full-04.jpg', width: 2200, height: 1554 },
         'aipin-full-05': { src: 'assets/images/drawings/aipin-full-05.jpg', width: 2200, height: 1554 },
         'aipin-full-06': { src: 'assets/images/drawings/aipin-full-06.jpg', width: 2200, height: 1554 },
+        'ap-activity-schedule': { src: 'assets/images/drawings/ap-activity-schedule.png', width: 4281, height: 1913 },
+        'ap-kitchen-detail-composite': { src: 'assets/images/drawings/ap-kitchen-detail-composite.png', width: 3188, height: 2602 },
         'city-yuanling-01': { src: 'assets/images/drawings/city-yuanling-01.jpg', width: 1413, height: 2000 },
         'city-yuanling-02': { src: 'assets/images/drawings/city-yuanling-02.jpg', width: 1415, height: 2000 },
         'city-yuanling-03': { src: 'assets/images/drawings/city-yuanling-03.jpg', width: 1413, height: 2000 },
@@ -357,6 +359,16 @@
         { asset: 'aipin-full-05', title: '住区更新 · 完整展板 05 / 06', description: '住区方案图纸 · 点击查看细节' },
         { asset: 'aipin-full-06', title: '住区更新 · 完整展板 06 / 06', description: '住区方案图纸 · 点击查看细节' }
       ];
+      drawingData.galleries.aipin.drawings[0] = {
+        asset: 'ap-activity-schedule',
+        title: '前期调研 · 公共空间活动时刻表',
+        description: '对比工作日与休息日，呈现三户住户的室内活动节奏与公共空间使用高峰。'
+      };
+      drawingData.galleries.aipin.drawings = drawingData.galleries.aipin.drawings.map((drawing) => drawing.asset === 'ap-kitchen' ? {
+        asset: 'ap-kitchen-detail-composite',
+        title: '厨房收纳 · 平面与剖面细部',
+        description: '结合厨房平面与三组剖面，清晰表达备餐、收纳、洗菜与烹饪的适老化操作关系。'
+      } : drawing);
       drawingData.galleries.aipin.drawings.push({
         asset: 'aipin-team-award',
         title: '团队获奖 · 专项奖成果展示',
