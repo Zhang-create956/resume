@@ -336,6 +336,19 @@
         'city-yuanling-08': { src: 'assets/images/drawings/city-yuanling-08.jpg', width: 1415, height: 2000 },
         'city-yuanling-09': { src: 'assets/images/drawings/city-yuanling-09.jpg', width: 1415, height: 2000 },
         'ai-urban-science-poster': { src: 'assets/images/ai/urban-science-poster.jpg', width: 1258, height: 1800 },
+        'ai-urban-science-exhibit': { src: 'assets/images/ai/urban-science-exhibit.jpg', width: 1280, height: 1707 },
+        'urban-cup-cover': { src: 'assets/images/ai/urban-cup-cover.png', width: 2000, height: 1125 },
+        'urban-cup-access': { src: 'assets/images/ai/urban-cup-access.png', width: 2000, height: 1125 },
+        'urban-cup-chain': { src: 'assets/images/ai/urban-cup-chain.png', width: 2000, height: 1125 },
+        'urban-cup-data': { src: 'assets/images/ai/urban-cup-data.png', width: 2000, height: 1125 },
+        'urban-cup-presentation': { src: 'assets/images/ai/urban-cup-presentation.jpg', width: 1920, height: 1280 },
+        'urban-cup-award': { src: 'assets/images/ai/urban-cup-award.jpg', width: 1920, height: 1440 },
+        'urban-cup-ai-workflow': { src: 'assets/images/ai/urban-cup-ai-workflow.png', width: 2000, height: 1125 },
+        'urban-cup-routes': { src: 'assets/images/ai/urban-cup-routes.png', width: 2000, height: 1125 },
+        'urban-cup-daily-switch': { src: 'assets/images/ai/urban-cup-daily-switch.png', width: 2000, height: 1125 },
+        'urban-cup-entry': { src: 'assets/images/ai/urban-cup-entry.png', width: 2000, height: 1125 },
+        'urban-cup-shenzhen-pilot': { src: 'assets/images/ai/urban-cup-shenzhen-pilot.png', width: 2000, height: 1125 },
+        'urban-cup-actions': { src: 'assets/images/ai/urban-cup-actions.png', width: 2000, height: 1125 },
         'aipin-team-award': { src: 'assets/images/drawings/aipin-team-award.jpg', width: 1280, height: 853 },
         'ai-hri-preview': { src: 'assets/images/ai/hri-dashboard-preview.png', width: 1440, height: 900 }
       });
@@ -389,11 +402,32 @@
       });
       drawingData.galleries['urban-science'] = {
         heading: '会议成果',
-        intro: '第 4 届国际城市科学与智能会议的研究海报，呈现深圳高温下公共避难空间的热安全可达性框架与核心发现。',
+        intro: '第 4 届国际城市科学与智能会议的研究海报与现场展出记录，呈现深圳高温下公共避难空间的热安全可达性框架与核心发现。',
         drawings: [
-          { asset: 'ai-urban-science-poster', title: '热安全可达性 · 深圳研究海报', description: 'From Nearby to Reachable: Heat-Safe Accessibility to Public Cooling Refuges in Shenzhen。' }
+          { asset: 'ai-urban-science-poster', title: '热安全可达性 · 深圳研究海报', description: 'From Nearby to Reachable: Heat-Safe Accessibility to Public Cooling Refuges in Shenzhen。' },
+          { asset: 'ai-urban-science-exhibit', title: '会议展出 · 海报现场记录', description: '研究海报在第 4 届国际城市科学与智能会议现场展出。' }
         ],
         boards: []
+      };
+      drawingData.galleries['urban-cup'] = {
+        heading: '作品汇报',
+        intro: '赛道二 Vibe Coding 的完整汇报内容：从“名义可达”到“热安全可达”，以按小时的路线、热暴露、开放时间和使用条件判断真实可达性。',
+        drawings: [
+          { asset: 'urban-cup-cover', title: '项目命题 · 热安全可达性', description: 'From Nominal Access to Heat-Safe Access · 以纽约城市降温空间为研究场景。' },
+          { asset: 'urban-cup-access', title: '问题定义 · 附近不等于可用', description: '开放、可到达、热安全与可使用四项条件必须同时成立。' },
+          { asset: 'urban-cup-chain', title: '判断链条 · 四段热安全可达', description: '以开放时间、真实步行路径、热负荷与到达后的使用条件串联判断。' },
+          { asset: 'urban-cup-data', title: '数据组织 · 地点与小时对齐', description: '将人群、热环境、交通、街道、树木、开放时间与使用条件连接为共享时空键。' },
+          { asset: 'urban-cup-presentation', title: '入围汇报 · 现场评选', description: '入围后参与现场汇报与评选，在 10 组队伍中角逐。' },
+          { asset: 'urban-cup-award', title: '赛事成果 · 三等奖', description: 'Urban Cup Challenge Awards 现场获奖记录。' }
+        ],
+        boards: [
+          { asset: 'urban-cup-ai-workflow', title: 'AI 工作流 · HeatSafe Research Harness', description: '完整汇报 05 / 10 · 五个 AI 技能协同研究、验证和记忆。' },
+          { asset: 'urban-cup-routes', title: '真实路径 · 识别虚假可达', description: '完整汇报 06 / 10 · 街道路网显示更高比例的虚假可达。' },
+          { asset: 'urban-cup-daily-switch', title: '日内差异 · 中午与夜间的不同瓶颈', description: '完整汇报 07 / 10 · 高温步行与站点关闭分别主导不同时间段。' },
+          { asset: 'urban-cup-entry', title: '进入与使用 · 到门口仍不足够', description: '完整汇报 08 / 10 · 进入信息、容量和压力共同影响使用。' },
+          { asset: 'urban-cup-shenzhen-pilot', title: '深圳试点 · 城市尺度证据', description: '完整汇报 09 / 10 · 将同一套按小时检查方法迁移至深圳。' },
+          { asset: 'urban-cup-actions', title: '行动建议 · 针对失效原因干预', description: '完整汇报 10 / 10 · 根据不同时段的失效原因组织遮阴、开放与交通策略。' }
+        ]
       };
       const drawingViewer = document.createElement('dialog');
       drawingViewer.className = 'drawing-viewer';
@@ -625,10 +659,24 @@
         '03': {
           kicker: '03 / AI作品',
           title: 'AI作品',
-          projectOrder: ['urban-science', 'hri-platform'],
+          projectOrder: ['urban-cup', 'urban-science', 'hri-platform'],
           projects: [
             {
-              id: 'urban-science', nav: 'AI 城市智能会议', number: '01 / AI PROJECT', title: '热安全可达性研究', type: '第4届国际城市科学与智能会议 · 深圳试点',
+              id: 'urban-cup', nav: 'Urban Cup', number: '01 / AI COMPETITION', title: '热安全可达性 · Urban Cup', type: '赛道二 Vibe Coding · 三等奖',
+              image: 'assets/images/ai/urban-cup-cover.png', imageFit: 'contain', imageAlt: 'Urban Cup 热安全可达性研究汇报封面',
+              summary: '面向高温下公共降温空间的真实可达性问题，构建“开放—可到达—热安全—可使用”的按小时判断链，并以 AI 研究工作流组织资料、测算、验证与复盘。',
+              links: [['赛事背景 01', 'https://mp.weixin.qq.com/s/Gw_uwvHN0aPoc-3HoQ5tvg'], ['赛事背景 02', 'https://mp.weixin.qq.com/s/wb6UPNmwMu0oycVGM2cu2Q'], ['赛事背景 03', 'https://mp.weixin.qq.com/s/82wPzXK7hFeaqwnWAw58eA']],
+              facts: [['参赛赛道', '赛道二 · Vibe Coding'], ['现场评选', '10 组入围队伍'], ['赛事成果', '三等奖']],
+              sections: [
+                { title: '项目背景', copy: 'Urban Cup 城市科学 Vibe Research Challenge 聚焦面向城市问题的 AI 研究与表达。本项目从“空间上很近”的降温点为何仍无法被安全使用出发，提出以真实行程替代直线距离的热安全可达性判断。', points: ['围绕按小时开放、路线、热暴露和进入使用条件重新定义“可达”', '入围后参与现场汇报与评选，在 10 组队伍中获得三等奖'] },
+                { title: '研究方法', copy: '将开放状态、街道路网、热负荷、入口与容量条件对齐到同一地点—小时索引，逐段检查一段出行能否真正完成，避免只以距离或最短时间判断服务覆盖。', points: ['建立 OPEN、REACHABLE、TOLERABLE、USABLE 四段判断链', '组合人群、热环境、交通、街道、树木、开放时间与进入条件等数据层', '由 AI 研究工作流协同规划、执行、证据验证与研究记忆'] },
+                { title: '阶段发现', copy: '以纽约案例测试显示，直线距离会显著低估“虚假可达”；日间热暴露与夜间站点关闭分别造成不同的服务失效。研究同时将这套按小时框架迁移至深圳开展初步试点。', points: ['真实街道路网在下午识别出更高比例的虚假可达', '中午优先改善遮阴步行路径，夜间优先保障开放时间与交通连接', '深圳试点持续检验图书馆、路线、热环境与人口的空间关系'] }
+              ],
+              flow: [['定义问题', '识别名义可达与真实可用之间的差距'], ['时空对齐', '组织地点、小时与多源城市数据'], ['AI 研究链', '规划、执行、核验与记忆协同'], ['策略输出', '针对不同时段的失效原因提出行动']],
+              note: '项目展示使用 Urban Cup 汇报 PDF 的原始页面与现场记录；研究结果应结合数据版本和具体阈值进一步复核。'
+            },
+            {
+              id: 'urban-science', nav: 'AI 城市智能会议', number: '02 / AI PROJECT', title: '热安全可达性研究', type: '第4届国际城市科学与智能会议 · 深圳试点',
               image: 'assets/images/ai/urban-science-poster.jpg', imageFit: 'contain', imageAlt: '深圳公共避难空间热安全可达性研究海报',
               summary: '从“附近”推进到“可达”，将避难空间开放状态、步行路网、路线热暴露与到达后的可使用性放入同一套城市尺度分析框架。',
               links: [['会议报道 01', 'https://mp.weixin.qq.com/s/wb6UPNmwMu0oycVGM2cu2Q'], ['会议报道 02', 'https://mp.weixin.qq.com/s/Gw_uwvHN0aPoc-3HoQ5tvg']],
@@ -642,7 +690,7 @@
               note: '成果包括会议论文《From Nearby to Reachable: Heat-Safe Accessibility to Public Cooling Refuges in Shenzhen》及研究海报。'
             },
             {
-              id: 'hri-platform', nav: 'AI 城市热风险平台', number: '02 / AI PROJECT', title: 'AI 城市热风险平台', type: '城市热风险识别 · 空间决策支持界面',
+              id: 'hri-platform', nav: 'AI 城市热风险平台', number: '03 / AI PROJECT', title: 'AI 城市热风险平台', type: '城市热风险识别 · 空间决策支持界面',
               image: 'assets/images/ai/hri-dashboard-preview.png', imageAlt: 'AI 城市热风险平台界面预览',
               summary: '以城市尺度热风险仪表盘组织高温危险、人口暴露与响应信息，让复杂的空间数据能够被快速浏览、定位和讨论。',
               links: [['打开热风险平台', 'https://zhang-create956.github.io/hri-dashboard/']],
