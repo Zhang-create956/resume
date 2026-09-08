@@ -143,12 +143,12 @@
 .project-points { display: grid; gap: 7px; margin: 11px 0 0; padding: 0; list-style: none; }
 .project-points li { position: relative; padding-left: 15px; color: #465466; font-size: 14px; line-height: 1.75; }
     .project-points li::before { content: ""; position: absolute; top: .68em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
-.project-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
-.project-flow-step { position: relative; min-height: 116px; padding: 15px; border: 1px solid #d8e7f1; border-radius: 12px; background: #fff; }
-.project-flow-step:not(:last-child)::after { content: "→"; position: absolute; top: 50%; right: -17px; z-index: 1; color: var(--blue); font-weight: 900; transform: translateY(-50%); }
+.project-flow { display: flex; align-items: stretch; gap: 12px; }
+.project-flow-step { flex: 1 1 0; min-width: 0; min-height: 132px; padding: 17px; border: 1px solid #d8e7f1; border-radius: 16px; background: #fff; box-shadow: 0 8px 18px rgba(27, 91, 132, .06); }
+.project-flow-arrow { display: grid; flex: 0 0 30px; place-items: center; align-self: center; color: var(--blue); font-size: 22px; font-weight: 900; line-height: 1; }
 .project-flow-index { color: var(--blue-deep); font-size: 12px; font-weight: 900; letter-spacing: .08em; }
-.project-flow-step b { display: block; margin-top: 4px; color: var(--ink); font-size: 14px; line-height: 1.45; }
-.project-flow-step span { display: block; margin-top: 5px; color: #5b6a7a; font-size: 12px; line-height: 1.55; }
+.project-flow-step b { display: block; margin-top: 7px; color: var(--ink); font-size: 15px; line-height: 1.45; }
+.project-flow-step span { display: block; margin-top: 7px; color: #5b6a7a; font-size: 13px; line-height: 1.6; }
 .project-note { margin: -4px 0 0; color: #66778a; font-size: 13px; line-height: 1.75; }
     @media (max-width: 700px) {
       .skip { top: 14px; right: 14px; padding: 8px 13px; font-size: 12px; }
@@ -165,9 +165,9 @@
       .project-hero { grid-template-columns: 1fr; gap: 14px; }
       .project-media, .project-video, .project-visual { min-height: 180px; }
       .project-facts { grid-template-columns: 1fr; }
-  .project-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .project-flow-step { min-height: 110px; padding: 13px; border-radius: 10px; }
-      .project-flow-step:not(:last-child)::after { display: none; }
+  .project-flow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .project-flow-step { min-height: 116px; padding: 14px; border-radius: 12px; }
+      .project-flow-arrow { display: none; }
       .experience-list { padding-left: 16px; }
       .experience-entry { padding-left: 17px; }
       .experience-entry::before { left: -19px; }
@@ -626,7 +626,7 @@
           const flowSection = document.createElement('section'); flowSection.className = 'project-section';
           const flowTitle = document.createElement('h4'); flowTitle.textContent = '项目工作流';
           const flow = document.createElement('div'); flow.className = 'project-flow';
-          project.flow.forEach(([titleText, description], index) => { const step = document.createElement('div'); step.className = 'project-flow-step'; const indexText = document.createElement('div'); indexText.className = 'project-flow-index'; indexText.textContent = `STEP ${String(index + 1).padStart(2, '0')}`; const stepTitle = document.createElement('b'); stepTitle.textContent = titleText; const stepDescription = document.createElement('span'); stepDescription.textContent = description; step.append(indexText, stepTitle, stepDescription); flow.append(step); });
+          project.flow.forEach(([titleText, description], index) => { const step = document.createElement('div'); step.className = 'project-flow-step'; const indexText = document.createElement('div'); indexText.className = 'project-flow-index'; indexText.textContent = `STEP ${String(index + 1).padStart(2, '0')}`; const stepTitle = document.createElement('b'); stepTitle.textContent = titleText; const stepDescription = document.createElement('span'); stepDescription.textContent = description; step.append(indexText, stepTitle, stepDescription); flow.append(step); if (index < project.flow.length - 1) { const arrow = document.createElement('span'); arrow.className = 'project-flow-arrow'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '→'; flow.append(arrow); } });
           flowSection.append(flowTitle, flow); panel.append(flowSection);
           const note = document.createElement('p'); note.className = 'project-note'; note.textContent = project.note; panel.append(note);
           appendProjectDrawings(panel, project.id);
