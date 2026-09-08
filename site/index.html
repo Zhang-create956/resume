@@ -381,7 +381,7 @@
   </script>
   <script>
     (() => {
-      const projectMediaInfo = {"aipin": {"poster": "assets/images/posters/aipin.jpg", "quality": "1080P · H.264"}, "goodhome": {"poster": "assets/images/posters/goodhome.jpg", "quality": "1080P · 高清源"}};
+      const projectMediaInfo = {"aipin": {"poster": "assets/images/posters/aipin-first-frame.jpg", "quality": "1080P · H.264"}, "goodhome": {"poster": "assets/images/posters/goodhome-first-frame.jpg", "quality": "1080P · 高清源"}};
       'use strict';
       const app = document.getElementById('app');
       const intro = document.getElementById('intro');
@@ -479,11 +479,12 @@
           title: '竞赛作品',
           projects: [
             {
-              id: 'aipin', nav: '爱拼公寓', number: '01 / PROJECT', title: '爱拼公寓', type: '适老化合租 · AI 共创改造助手',
+              id: 'aipin', nav: '爱拼公寓', number: '02 / PROJECT', title: '爱拼公寓', type: '适老化合租 · AI 共创改造助手',
               video: 'assets/video/aipin-apartment.mp4', videoLabel: '适老化改造方案演示',
               summary: '以深圳低龄老年打工者合租为场景，把空间改造转译为“调研材料输入—风险与冲突识别—共识生成—模块化方案—交付物输出”的 AI 共创工作台。',
               facts: [['核心人群', '低龄老年合租住户'], ['设计场景', '户内 + 住区公共空间'], ['方案定位', '可追溯的共创改造流程']],
               sections: [
+                { title: '项目背景与成果', copy: '项目由清华大学与国家老年人协会举办，围绕老年友好型合租居住展开空间与服务协同设计，最终获得三等奖。', points: ['主办方：清华大学 × 国家老年人协会', '竞赛成果：三等奖'] },
                 { title: '核心问题', copy: '多人共享有限住宅时，夜间如厕、湿区转身、厨房洗晾、储物与作息冲突往往同时出现；住户又难以从专业图纸理解改造取舍。', points: ['以角色、场景、任务链而非单件家具识别问题', '把安全、效率、私密与归属感共同纳入改造判断'] },
                 { title: '产品方案', copy: '“爱拼智改共创助手”把生活叙事、现场信息和空间约束转为角色—场景—痛点—方案—反馈的证据链。', points: ['调研解析器：转写、脱敏并提取场景证据', '洞察看板：聚合冲突、风险和待确认项', '方案比较与住户共创页：用口语化方案卡支持取舍'] }
               ],
@@ -491,7 +492,7 @@
               note: '视频为项目演示；AI 工作台是基于既有空间方案提出的产品化设计，涉及安全、施工与规范的内容需由专业人员复核。'
             },
             {
-              id: 'goodhome', nav: '好房子', number: '02 / PROJECT', title: '怡老居', type: '既有住房更新 · 适老化服务产品',
+              id: 'goodhome', nav: '好房子', number: '03 / PROJECT', title: '怡老居', type: '既有住房更新 · 适老化服务产品',
               video: 'assets/video/goodhome.mp4', videoLabel: '好房子竞赛作品演示',
               summary: '围绕“相伴晚年，自在栖居”，将既有住房更新组织为发现风险、家庭共识、轻量改造、施工协作和长期陪伴的服务闭环。',
               facts: [['核心人群', '长者、子女与施工团队'], ['空间范围', '入户、起居、卧室、卫浴等'], ['产品形态', '居家焕新服务流程']],
@@ -503,7 +504,7 @@
               note: '视频为竞赛作品演示；页面中的产品流程用于说明既有住房更新如何形成可理解、可协作的服务体验。'
             },
             {
-              id: 'city', nav: '城市设计', number: '03 / PROJECT', title: '园岭共建 OS', type: '城市微更新 · 街区协同系统',
+              id: 'city', nav: '城市设计', number: '04 / PROJECT', title: '园岭共建 OS', type: '城市微更新 · 街区协同系统',
               visualTitle: '园岭共建 OS', visualItems: ['安全学径', 'Citywalk 路线', '模块更新', '运营闭环'],
               summary: '基于“全时街区，生活共建”的城市更新方案，以安全学径建立日常高频，用路线内容和空间共享激活街区，并以轻量工具沉淀持续运营能力。',
               facts: [['服务对象', '学生、住户、商户、学校、运营者'], ['空间策略', '学径、街道、住宅与校地共享'], ['产品定位', '线下空间 + 线上协同']],
@@ -515,11 +516,12 @@
               note: '本案例以已完成的空间策略为基础；客流、经营与问卷等数据需在落地阶段通过实地调研与试点验证。'
             },
             {
-              id: 'ismart', nav: 'iSmart 工作营', number: '04 / WORKSHOP', title: 'iSmart 工作营', type: '机器人智能建构 · 实体材料实验',
+              id: 'ismart', nav: 'iSmart 工作营', number: '01 / WORKSHOP', title: 'iSmart 工作营', type: '机器人智能建构 · 实体材料实验',
               video: "assets/video/ismart-workshop-hq.mp4", videoLabel: 'iSmart 工作营汇报视频',
               summary: '围绕机器人智能建构展开从形态研究、材料试验到公共座椅场景表达的协作工作营；以实体试作和汇报影像记录构件从概念到空间的完整过程。',
               facts: [['命题', '机器人智能建构'], ['方法', '材料试验 × 实体试作'], ['成果', '环形公共座椅提案']],
               sections: [
+                {title: '项目背景', copy: '参加由青岛理工大学建筑与城乡规划学院举办的第五届“机器人智能建构”数字建构国际工作营，围绕机器人、数字建构与材料实验展开跨学科实践。', points: ['主办方：青岛理工大学建筑与城乡规划学院', '工作营主题：机器人智能建构']},
                 {title: '从材料试验到构件逻辑', copy: '以配比、试块和过程记录为基础，将材料表现转译为可被装配和制造的构件关系。', points: ['梳理形态、结构与材料之间的对应关系', '通过试块观察表面肌理、强度与制作可行性', '以连续迭代校准构件尺度和连接方式']},
                 {title: '从实体原型到公共场景', copy: '将构件系统组织为可停留、可交流的环形公共座椅，并在校园场景中表达空间体验。', points: ['通过实体原型验证构件组合与人体尺度', '以环形布局回应停留、对话与共享使用', '完成场景效果、制作过程与工作营汇报']},
               ],
@@ -583,6 +585,7 @@
         const shell = document.createElement('section'); shell.className = 'competition-shell';
         const nav = document.createElement('nav'); nav.className = 'competition-nav'; nav.setAttribute('aria-label', '竞赛项目导航'); nav.setAttribute('role', 'tablist');
         const panelHost = document.createElement('div');
+        item.projects = ['ismart', 'aipin', 'goodhome', 'city'].map(id => item.projects.find(project => project.id === id)).filter(Boolean);
         const buttons = new Map();
 
         const renderPanel = project => {
