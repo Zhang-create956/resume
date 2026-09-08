@@ -225,6 +225,15 @@
 .drawing-boards .drawings-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 16px; }
 .drawing-boards .drawing-open img { height: 190px; aspect-ratio: 4 / 3; }
 .drawing-boards.is-portrait .drawing-open img { height: 250px; aspect-ratio: 3 / 4; }
+.drawing-set { margin-top: 34px; padding-top: 24px; border-top: 1px solid #deE8ef; }
+.drawing-set:first-of-type { margin-top: 26px; }
+.drawing-set-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+.drawing-set-heading h5 { margin: 0; color: #172838; font-size: 17px; font-weight: 800; letter-spacing: -.02em; }
+.drawing-set-heading span { color: #0876ca; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+.drawing-set .drawings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.drawing-set.is-trio .drawings-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.drawing-set .drawing-open img { height: 360px; aspect-ratio: 3 / 4; }
+.drawing-set.is-landscape .drawing-open img { height: 300px; aspect-ratio: 4 / 3; }
 .drawing-viewer { width: min(1600px, 94vw); max-width: 94vw; height: 92dvh; max-height: 92dvh; margin: auto; padding: 0; overflow: hidden; border: 1px solid #324759; border-radius: 15px; color: #fff; background: #0c1823; box-shadow: 0 28px 100px #0008; }
 .drawing-viewer::backdrop { background: rgba(1,8,15,.86); }
 .drawing-viewer[open] { display: flex; flex-direction: column; }
@@ -253,6 +262,9 @@
   .drawing-open img { height: 210px; }
   .drawing-boards .drawings-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
   .drawing-boards .drawing-open { padding: 6px; border-radius: 8px; }
+  .drawing-set { margin-top: 28px; padding-top: 20px; }
+  .drawing-set .drawings-grid, .drawing-set.is-trio .drawings-grid { grid-template-columns: 1fr; }
+  .drawing-set .drawing-open img, .drawing-set.is-landscape .drawing-open img { height: 260px; aspect-ratio: 3 / 4; }
   .drawing-viewer { width: 96vw; max-width: 96vw; height: 94dvh; max-height: 94dvh; }
   .drawing-viewer-header { flex-wrap: wrap; padding: 10px 12px; }
   .drawing-viewer-header h3 { flex: 1; font-size: 12px; min-width: 140px; }
@@ -375,7 +387,18 @@
         'life-badminton-2025-trophy': { src: 'assets/images/life/life-badminton-2025-trophy.jpg', width: 1080, height: 1440 },
         'life-badminton-2026-team': { src: 'assets/images/life/life-badminton-2026-team.jpg', width: 1708, height: 1280 },
         'life-badminton-younimax-medal': { src: 'assets/images/life/life-badminton-younimax-medal.jpg', width: 1440, height: 1920 },
-        'life-badminton-younimax-team': { src: 'assets/images/life/life-badminton-younimax-team.jpg', width: 2048, height: 1364 }
+        'life-badminton-younimax-team': { src: 'assets/images/life/life-badminton-younimax-team.jpg', width: 2048, height: 1364 },
+        'life-quick-set01-a': { src: 'assets/images/life/life-quick-set01-a.jpg', width: 1280, height: 1910 },
+        'life-quick-set01-b': { src: 'assets/images/life/life-quick-set01-b.jpg', width: 1279, height: 1923 },
+        'life-quick-set02-a': { src: 'assets/images/life/life-quick-set02-a.jpg', width: 1279, height: 1737 },
+        'life-quick-set02-b': { src: 'assets/images/life/life-quick-set02-b.jpg', width: 1279, height: 1654 },
+        'life-quick-set03-a': { src: 'assets/images/life/life-quick-set03-a.jpg', width: 1732, height: 1280 },
+        'life-quick-set03-b': { src: 'assets/images/life/life-quick-set03-b.jpg', width: 1714, height: 1280 },
+        'life-quick-set04-a': { src: 'assets/images/life/life-quick-set04-a.jpg', width: 1279, height: 1736 },
+        'life-quick-set04-b': { src: 'assets/images/life/life-quick-set04-b.jpg', width: 1279, height: 1700 },
+        'life-quick-set05-a': { src: 'assets/images/life/life-quick-set05-a.jpg', width: 1280, height: 1817 },
+        'life-quick-set05-b': { src: 'assets/images/life/life-quick-set05-b.jpg', width: 1280, height: 1817 },
+        'life-quick-set05-c': { src: 'assets/images/life/life-quick-set05-c.jpg', width: 1279, height: 1801 }
       });
       drawingData.galleries.city = {
         intro: '园岭新村改造设计共提供 9 张图纸，覆盖城市、商住、学校与住宅四个层级。点击任意图纸可查看大图细节。',
@@ -460,29 +483,36 @@
       };
       drawingData.galleries['hand-drawing'] = {
         heading: '手绘图集',
-        intro: '从本科作品集的手绘页、考研快题图纸到设计日常，记录用线条、色彩和版式组织空间与物件的过程。',
+        intro: '',
+        compactHeader: true,
         drawings: [
           { asset: 'life-moyu-characters', title: '摸鱼图 · 角色手绘', description: '以鲜明色彩和卡通角色完成的日常手绘记录。' },
-          { asset: 'life-quick-01', title: '考研快题 · 空间方案表达', description: '以建筑鸟瞰、平面和立面组织方案叙事。' },
           { asset: 'life-design-gift', title: '设计日常 · 周年礼品套装', description: '手账本、咖啡杯、雨伞、书签与礼盒的组合设计。' },
           { asset: 'life-design-puzzle', title: '设计日常 · 拼图互动装置', description: '通过拼图的组装过程记录一次线下设计活动。' }
         ],
-        boards: [
-          { asset: 'life-undergraduate-handdraw-33', title: '本科作品集 · 手绘页 01', description: '本科阶段手绘图集节选 · 点击查看细节。' },
-          { asset: 'life-undergraduate-handdraw-34', title: '本科作品集 · 手绘页 02', description: '本科阶段手绘图集节选 · 点击查看细节。' },
-          { asset: 'life-undergraduate-handdraw-35', title: '本科作品集 · 手绘页 03', description: '本科阶段手绘图集节选 · 点击查看细节。' },
-          { asset: 'life-undergraduate-handdraw-36', title: '本科作品集 · 手绘页 04', description: '本科阶段手绘图集节选 · 点击查看细节。' },
-          { asset: 'life-undergraduate-handdraw-37', title: '本科作品集 · 手绘页 05', description: '本科阶段手绘图集节选 · 点击查看细节。' },
-          { asset: 'life-quick-02', title: '考研快题 · 平面组织', description: '用动线、节点和功能关系梳理场地结构。' },
-          { asset: 'life-quick-03', title: '考研快题 · 建筑鸟瞰', description: '以鸟瞰、总平和剖面串联空间策略。' },
-          { asset: 'life-quick-04', title: '考研快题 · 多层空间', description: '以连续平面表达功能分区和流线关系。' },
-          { asset: 'life-quick-05', title: '考研快题 · 创新中心', description: '通过透视和总平呈现场地、建筑与景观。' },
-          { asset: 'life-quick-06', title: '考研快题 · 复合功能', description: '以不同楼层平面和剖面说明空间组织。' },
-          { asset: 'life-quick-07', title: '考研快题 · 山地建筑', description: '用平台、庭院和场地高差形成空间层次。' },
-          { asset: 'life-quick-08', title: '考研快题 · 邮局改造', description: '以总平、平面和剖面组织改造后的使用场景。' },
-          { asset: 'life-quick-09', title: '考研快题 · 创客空间', description: '通过多个平面与剖面展开功能分布。' },
-          { asset: 'life-quick-10', title: '考研快题 · 场地与流线', description: '以功能块、广场和动线推进空间叙事。' },
-          { asset: 'life-quick-11', title: '考研快题 · 工作室组合', description: '以多组工作室和共享厅表达平面推敲。' }
+        boards: [],
+        sets: [
+          { title: '快题图 · 第 01 套', items: [
+            { asset: 'life-quick-set01-a', title: '第 01 套 · 图纸 01', description: '' },
+            { asset: 'life-quick-set01-b', title: '第 01 套 · 图纸 02', description: '' }
+          ]},
+          { title: '快题图 · 第 02 套', items: [
+            { asset: 'life-quick-set02-a', title: '第 02 套 · 图纸 01', description: '' },
+            { asset: 'life-quick-set02-b', title: '第 02 套 · 图纸 02', description: '' }
+          ]},
+          { title: '快题图 · 第 03 套', landscape: true, items: [
+            { asset: 'life-quick-set03-a', title: '第 03 套 · 图纸 01', description: '' },
+            { asset: 'life-quick-set03-b', title: '第 03 套 · 图纸 02', description: '' }
+          ]},
+          { title: '快题图 · 第 04 套', items: [
+            { asset: 'life-quick-set04-a', title: '第 04 套 · 图纸 01', description: '' },
+            { asset: 'life-quick-set04-b', title: '第 04 套 · 图纸 02', description: '' }
+          ]},
+          { title: '快题图 · 第 05 套', items: [
+            { asset: 'life-quick-set05-a', title: '第 05 套 · 图纸 01', description: '' },
+            { asset: 'life-quick-set05-b', title: '第 05 套 · 图纸 02', description: '' },
+            { asset: 'life-quick-set05-c', title: '第 05 套 · 图纸 03', description: '' }
+          ]}
         ]
       };
       drawingData.galleries['badminton'] = {
@@ -546,27 +576,43 @@
       function appendProjectDrawings(panel,projectId) {
         const collection=drawingData.galleries[projectId]; if(!collection) return;
         const section=document.createElement('section'); section.className='project-drawings'; section.setAttribute('aria-label',collection.heading || '方案图纸');
-        const heading=document.createElement('div'); heading.className='drawings-heading';
-        const headingTitle=document.createElement('div'); headingTitle.innerHTML='<span class="drawings-kicker">SELECTED DRAWINGS</span><h4>' + (collection.heading || '方案图纸') + '</h4>';
-        const intro=document.createElement('p'); intro.textContent=collection.intro; heading.append(headingTitle,intro); section.append(heading);
-        const all=[...collection.drawings,...collection.boards];
-        function grid(items,offset) {
+        if(!collection.compactHeader){
+          const heading=document.createElement('div'); heading.className='drawings-heading';
+          const headingTitle=document.createElement('div'); headingTitle.innerHTML='<span class="drawings-kicker">SELECTED DRAWINGS</span><h4>' + (collection.heading || '方案图纸') + '</h4>';
+          heading.append(headingTitle);
+          if(collection.intro){ const intro=document.createElement('p'); intro.textContent=collection.intro; heading.append(intro); }
+          section.append(heading);
+        }
+        const sets=collection.sets || [];
+        const all=[...collection.drawings,...sets.flatMap(set=>set.items),...collection.boards];
+        function grid(items,offset,options={}) {
           const element=document.createElement('div');element.className='drawings-grid';
           items.forEach((entry,index)=>{
             const figure=document.createElement('figure');figure.className='drawing-card';
-            if(items.length%2===1 && index===items.length-1 && !offset) figure.classList.add('is-wide');
-            const button=document.createElement('button');button.className='drawing-open';button.type='button';button.setAttribute('aria-label',`放大查看：${entry.title}`);
+            if(items.length%2===1 && index===items.length-1 && !offset && !options.preventWide) figure.classList.add('is-wide');
+            const button=document.createElement('button');button.className='drawing-open';button.type='button';button.setAttribute('aria-label','放大查看：'+entry.title);
             const asset=drawingData.assets[entry.asset], image=document.createElement('img');image.src=asset.src;image.alt=entry.title;image.loading='lazy';image.decoding='async';image.width=asset.width;image.height=asset.height;
             button.append(image);button.addEventListener('click',()=>openDrawing(all,index+offset,button));
             const caption=document.createElement('figcaption');caption.className='drawing-caption';const title=document.createElement('strong');title.textContent=entry.title;const description=document.createElement('span');description.textContent=entry.description;
-            caption.append(title,description);figure.append(button,caption);element.append(figure);
+            caption.append(title); if(entry.description) caption.append(description); figure.append(button,caption);element.append(figure);
           });return element;
         }
-        section.append(grid(collection.drawings,0));
+        if(collection.drawings.length) section.append(grid(collection.drawings,0));
+        let offset=collection.drawings.length;
+        sets.forEach((set,index)=>{
+          const group=document.createElement('section'); group.className='drawing-set';
+          if(set.items.length===3) group.classList.add('is-trio');
+          if(set.landscape) group.classList.add('is-landscape');
+          const groupHeading=document.createElement('div'); groupHeading.className='drawing-set-heading';
+          const groupTitle=document.createElement('h5'); groupTitle.textContent=set.title;
+          const count=document.createElement('span'); count.textContent=String(index+1).padStart(2,'0')+' / '+String(sets.length).padStart(2,'0');
+          groupHeading.append(groupTitle,count); group.append(groupHeading,grid(set.items,offset,{preventWide:true})); section.append(group);
+          offset+=set.items.length;
+        });
         if(collection.boards.length){
           const boards=document.createElement('details');boards.className='drawing-boards';if(projectId==='city')boards.classList.add('is-portrait');
-          const summary=document.createElement('summary');summary.textContent=`完整展板 · ${String(collection.boards.length).padStart(2,'0')} 张`;
-          boards.append(summary,grid(collection.boards,collection.drawings.length));section.append(boards);
+          const summary=document.createElement('summary');summary.textContent='完整展板 · '+String(collection.boards.length).padStart(2,'0')+' 张';
+          boards.append(summary,grid(collection.boards,offset));section.append(boards);
         }
         panel.append(section);
       }
@@ -784,13 +830,7 @@
               image: 'assets/images/life/life-moyu-characters.jpg', imageAlt: '彩色角色手绘作品',
               summary: '从随手画下的角色到考研快题中的空间推敲，再到礼品和活动中的视觉设计，手绘是持续观察、构图与表达的日常练习。',
               facts: [['内容分类', '摸鱼图 · 考研快题 · 设计日常'], ['表达媒介', '马克笔 · 线稿 · 平面设计'], ['作品来源', '本科作品集与个人日常记录']],
-              sections: [
-                { title: '摸鱼图', copy: '用轻松、直接的角色绘画记录日常情绪与色彩想法。它不是为了完成一张“正式作品”，而是保留快速起稿、构图和上色时最自然的判断。', points: ['以角色表情、姿态和色块建立视觉焦点', '在有限时间内完成从草稿到画面的色彩练习'] },
-                { title: '考研快题图', copy: '快题训练将场地、功能、流线和空间气质压缩进有限的图纸中，通过鸟瞰、平面、剖面和立面训练信息取舍与版面叙事。', points: ['以总平、平面和剖面建立清晰的空间逻辑', '通过手绘透视与色彩层级强化阅读顺序', '持续复盘图面信息密度、比例与表达效率'] },
-                { title: '设计日常', copy: '从周年礼品套装到线下互动拼图，把日常的产品、材料和参与方式转成完整的视觉语言，关注“被看见”之外，也关注“被拿起、被使用”。', points: ['围绕物件组合、包装和文案形成统一识别', '通过互动装置记录活动中的参与和连接'] }
-              ],
-              flow: [['灵感收集', '从角色、日常物件和空间观察中捕捉线索'], ['构图推敲', '组织主体、视线、功能与版面节奏'], ['线稿上色', '控制轮廓、材质、色彩和信息层级'], ['归档复盘', '将过程沉淀为作品集与持续练习'] ],
-              note: '下方收录本科作品集的手绘页、考研快题图纸与设计日常记录；点击任意图可查看大图细节。'
+              galleryOnly: true
             },
             {
               id: 'badminton', nav: '羽毛球', number: '02 / DAILY LIFE', title: '羽毛球', type: '团队赛事 · 赛场日常',
@@ -932,6 +972,7 @@
           }
           hero.append(media, brief); panel.append(hero);
 
+          if (!project.galleryOnly) {
           const facts = document.createElement('ul'); facts.className = 'project-facts';
           project.facts.forEach(([label, value]) => { const fact = document.createElement('li'); fact.className = 'project-fact'; const factLabel = document.createElement('b'); factLabel.textContent = label; const factValue = document.createElement('span'); factValue.textContent = value; fact.append(factLabel, factValue); facts.append(fact); });
           panel.append(facts);
@@ -944,6 +985,7 @@
           project.flow.forEach(([titleText, description], index) => { const step = document.createElement('div'); step.className = 'project-flow-step'; const indexText = document.createElement('div'); indexText.className = 'project-flow-index'; indexText.textContent = `STEP ${String(index + 1).padStart(2, '0')}`; const stepTitle = document.createElement('b'); stepTitle.textContent = titleText; const stepDescription = document.createElement('span'); stepDescription.textContent = description; step.append(indexText, stepTitle, stepDescription); flow.append(step); if (index < project.flow.length - 1) { const arrow = document.createElement('span'); arrow.className = 'project-flow-arrow'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '→'; flow.append(arrow); } });
           flowSection.append(flowTitle, flow); panel.append(flowSection);
           const note = document.createElement('p'); note.className = 'project-note'; note.textContent = project.note; panel.append(note);
+          }
           appendProjectDrawings(panel, project.id);
           panelHost.append(panel);
         };
