@@ -121,6 +121,7 @@
     .project-panel { display: grid; gap: 18px; animation: project-panel-in 260ms var(--ease) both; }
     @keyframes project-panel-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     .project-hero { display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(235px, .78fr); gap: 18px; align-items: stretch; }
+    .project-hero.is-text-only { grid-template-columns: 1fr; }
     .project-media { min-height: 226px; overflow: hidden; border: 1px solid #bed7e8; background: #07131f; box-shadow: 0 14px 26px rgba(18, 85, 128, .12); }
     .project-video { display: block; width: 100%; height: 100%; min-height: 226px; object-fit: cover; background: #07131f; }
     .project-image { display: block; width: 100%; height: 100%; min-height: 226px; object-fit: cover; object-position: center; background: #eaf3fa; }
@@ -827,23 +828,16 @@
           projects: [
             {
               id: 'hand-drawing', nav: '手绘', number: '01 / DAILY CREATION', title: '手绘图集', type: '摸鱼图 · 考研快题 · 设计日常',
-              image: 'assets/images/life/life-moyu-characters.jpg', imageAlt: '彩色角色手绘作品',
               summary: '从随手画下的角色到考研快题中的空间推敲，再到礼品和活动中的视觉设计，手绘是持续观察、构图与表达的日常练习。',
               facts: [['内容分类', '摸鱼图 · 考研快题 · 设计日常'], ['表达媒介', '马克笔 · 线稿 · 平面设计'], ['作品来源', '本科作品集与个人日常记录']],
+              hideHeroMedia: true,
               galleryOnly: true
             },
             {
               id: 'badminton', nav: '羽毛球', number: '02 / DAILY LIFE', title: '羽毛球', type: '团队赛事 · 赛场日常',
-              image: 'assets/images/life/life-badminton-2025-trophy.jpg', imageAlt: '羽毛球赛事奖杯与奖牌',
               summary: '从团队训练到赛场协作，羽毛球提供了稳定的节奏感和共同向前的体验。三次团体赛事的奖牌与合影，记录的是队伍、伙伴与持续投入。',
-              facts: [['2025', '研究生羽毛球院队团体冠军'], ['2026', '研究生羽毛球团体季军'], ['团队赛事', '南山有你 MAX 团队季军']],
-              sections: [
-                { title: '赛场记录', copy: '比赛的价值不只在结果，也在每一次配合、调整与为团队补位的过程。现场照片、奖牌和合影保存了不同赛季的投入与共同记忆。', points: ['2025 年研究生羽毛球院队团体冠军', '2026 年研究生羽毛球团体季军', '“南山有你 MAX”团队季军'] },
-                { title: '团队协作', copy: '团体赛要求个人状态与队伍节奏同步：上场时专注每一分，场下时为队友提供支持。在这一过程中，竞技也成为建立信任和稳定感的方式。', points: ['用分工、沟通和应变回应不同对手与赛程', '在高压回合中保持专注，也在赛后一起复盘'] },
-                { title: '运动日常', copy: '规律训练让工作与学习之外有了明确的身体节奏。球拍、场地、队友和一场完整的比赛，共同构成持续投入的日常。', points: ['以稳定训练维持体能、专注力与情绪调节', '把个人兴趣延伸为长期的团队连接'] }
-              ],
-              flow: [['日常训练', '积累步伐、击球与体能基础'], ['赛前磨合', '根据阵容与对手调整分工'], ['场上协作', '专注每一分，彼此补位'], ['赛后复盘', '沉淀经验，也记录共同完成的时刻'] ],
-              note: '下方收录 2025、2026 年研究生羽毛球团体赛及“南山有你 MAX”团队赛的 6 张现场记录。'
+              hideHeroMedia: true,
+              galleryOnly: true
             }
           ]
         }
@@ -942,7 +936,7 @@
           const panel = document.createElement('article'); panel.className = 'project-panel'; panel.setAttribute('role', 'tabpanel'); panel.id = `project-panel-${project.id}`;
           const hero = document.createElement('section'); hero.className = 'project-hero';
           const media = document.createElement('div'); media.className = 'project-media';
-          if (project.video) {
+          if (!project.hideHeroMedia && project.video) {
             const video = document.createElement('video'); video.className = 'project-video'; video.controls = true; video.playsInline = true; video.preload = 'metadata'; video.src = project.video; video.poster = projectMediaInfo[project.id]?.poster || ''; video.setAttribute('aria-label', project.videoLabel); video.append(document.createTextNode('你的浏览器暂不支持此视频播放。'));
             media.append(video);
             const mediaBar = document.createElement('div'); mediaBar.className = 'project-media-bar';
@@ -951,9 +945,9 @@
             expandButton.addEventListener('click', () => { const expanded = media.classList.toggle('is-expanded'); expandButton.textContent = expanded ? '收起演示' : '展开演示'; expandButton.setAttribute('aria-pressed', String(expanded)); });
             mediaBar.append(mediaStatus, expandButton); media.append(mediaBar);
 
-          } else if (project.image) {
+          } else if (!project.hideHeroMedia && project.image) {
             const image = document.createElement('img'); image.className = 'project-image'; if (project.imageFit === 'contain') image.classList.add('is-poster'); image.src = project.image; image.alt = project.imageAlt || project.title; image.loading = 'eager'; image.decoding = 'async'; media.append(image);
-          } else {
+          } else if (!project.hideHeroMedia) {
             const visual = document.createElement('div'); visual.className = 'project-visual';
             const visualTitle = document.createElement('strong'); visualTitle.textContent = project.visualTitle; visual.append(visualTitle);
             project.visualItems.forEach(label => { const visualItem = document.createElement('span'); visualItem.textContent = label; visual.append(visualItem); });
@@ -970,7 +964,9 @@
             project.links.forEach(([label, href]) => { const link = document.createElement('a'); link.href = href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = label; actions.append(link); });
             brief.append(actions);
           }
-          hero.append(media, brief); panel.append(hero);
+          if (project.hideHeroMedia) hero.classList.add('is-text-only');
+          else hero.append(media);
+          hero.append(brief); panel.append(hero);
 
           if (!project.galleryOnly) {
           const facts = document.createElement('ul'); facts.className = 'project-facts';
