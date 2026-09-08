@@ -123,6 +123,8 @@
     .project-hero { display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(235px, .78fr); gap: 18px; align-items: stretch; }
     .project-media { min-height: 226px; overflow: hidden; border: 1px solid #bed7e8; background: #07131f; box-shadow: 0 14px 26px rgba(18, 85, 128, .12); }
     .project-video { display: block; width: 100%; height: 100%; min-height: 226px; object-fit: cover; background: #07131f; }
+    .project-image { display: block; width: 100%; height: 100%; min-height: 226px; object-fit: cover; object-position: center; background: #eaf3fa; }
+    .project-image.is-poster { object-fit: contain; }
     .project-visual { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: end; min-height: 226px; padding: 22px; overflow: hidden; background: linear-gradient(135deg, #061727, #0c5183); }
     .project-visual::before { content: ""; position: absolute; inset: 0; opacity: .25; background-image: linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px); background-size: 30px 30px; transform: skewY(-8deg) scale(1.18); }
     .project-visual strong { position: absolute; top: 19px; left: 21px; z-index: 1; max-width: 75%; color: #fff; font-size: clamp(21px, 3vw, 30px); line-height: 1.08; letter-spacing: -.04em; }
@@ -132,6 +134,9 @@
 .project-brief h3 { margin: 0; color: var(--ink); font-size: clamp(24px, 3.2vw, 34px); letter-spacing: -.045em; line-height: 1.08; }
 .project-type { margin: 8px 0 12px; color: #2478b7; font-size: 15px; font-weight: 800; }
 .project-summary { margin: 0; color: #445366; font-size: 15px; line-height: 1.8; }
+.project-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.project-actions a { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border: 1px solid #b9d6eb; border-radius: 999px; color: #086fb8; background: #f4faff; font-size: 13px; font-weight: 800; line-height: 1; text-decoration: none; transition: color 180ms ease, background 180ms ease, border-color 180ms ease; }
+.project-actions a:hover { border-color: #087ac7; color: #fff; background: #087ac7; }
     .project-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin: 0; padding: 0; list-style: none; }
     .project-fact { min-width: 0; padding: 10px; border-top: 2px solid var(--blue); background: #f2f8fc; }
     .project-fact b, .project-fact span { display: block; }
@@ -180,13 +185,15 @@
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; } }
 
 /* PROJECT_DRAWINGS_STYLE_START */
-    .competition-nav { position: relative; z-index: 5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; width: 100%; padding: 12px 0; border: 0; background: #fcfcfb; }
+    .competition-nav { position: relative; z-index: 5; display: grid; grid-template-columns: repeat(var(--project-count, 4), minmax(0, 1fr)); gap: 12px; width: 100%; padding: 12px 0; border: 0; background: #fcfcfb; }
 .competition-tab { width: 100%; min-width: 0; min-height: 48px; padding: 12px 16px; border: 1px solid #cddfed; border-radius: 999px; background: #f0f7fc; font-size: 14px; letter-spacing: .035em; }
 .competition-tab.is-active { background: var(--ink); border-color: var(--ink); box-shadow: 0 5px 14px rgba(14,17,25,.12); }
 .competition-tab:focus-visible { outline: 3px solid #168de9; outline-offset: 2px; }
 .project-hero { align-items: start; }
 .project-media { min-width: 0; min-height: 0; align-self: start; border-radius: 12px; }
 .project-video { width: 100%; height: auto; min-height: 0; aspect-ratio: 16 / 9; object-fit: contain; }
+.project-image { width: 100%; height: auto; min-height: 0; aspect-ratio: 16 / 9; object-fit: cover; }
+.project-image.is-poster { object-fit: contain; }
 .project-video:fullscreen { width: 100vw; height: 100vh; object-fit: contain; }
 .project-media-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 13px; color: #d4e7f5; background: #0c1e2c; font-size: 11px; line-height: 1.5; }
 .project-media-bar button { flex: none; padding: 6px 12px; border: 1px solid #657d90; border-radius: 999px; color: #fff; background: transparent; font-size: 11px; cursor: pointer; }
@@ -234,7 +241,7 @@
 .drawing-viewer-footer { display: flex; align-items: center; justify-content: center; flex: none; gap: 20px; padding: 9px 15px; border-top: 1px solid #304352; }
 .drawing-counter { color: #b9cbd9; font-size: 12px; font-variant-numeric: tabular-nums; }
 @media(max-width:700px) {
-  .competition-nav { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; padding: 8px 0; overflow: visible; }
+  .competition-nav { grid-template-columns: repeat(var(--project-count,4),minmax(0,1fr)); gap: 6px; padding: 8px 0; overflow: visible; }
   .competition-tab { min-height: 44px; padding: 10px 3px; font-size: 12px; letter-spacing: 0; }
   .project-media, .project-video { min-height: 0; }
   .project-media-bar { gap: 6px; padding: 9px; font-size: 10px; }
@@ -306,6 +313,57 @@
   <script>
       // 项目图纸引用站内 assets；精选小图可点击放大，完整展板按需展开。
       const drawingData = JSON.parse(document.getElementById('project-drawing-data').textContent);
+      // 2026 园岭新村改造图纸与 AI 城市项目成果：均使用站内优化资源，避免加载原始超大文件。
+      Object.assign(drawingData.assets, {
+        'aipin-full-01': { src: 'assets/images/drawings/aipin-full-01.jpg', width: 2200, height: 1554 },
+        'aipin-full-02': { src: 'assets/images/drawings/aipin-full-02.jpg', width: 2200, height: 1554 },
+        'aipin-full-03': { src: 'assets/images/drawings/aipin-full-03.jpg', width: 2200, height: 1554 },
+        'aipin-full-04': { src: 'assets/images/drawings/aipin-full-04.jpg', width: 2200, height: 1554 },
+        'aipin-full-05': { src: 'assets/images/drawings/aipin-full-05.jpg', width: 2200, height: 1554 },
+        'aipin-full-06': { src: 'assets/images/drawings/aipin-full-06.jpg', width: 2200, height: 1554 },
+        'city-yuanling-01': { src: 'assets/images/drawings/city-yuanling-01.jpg', width: 1413, height: 2000 },
+        'city-yuanling-02': { src: 'assets/images/drawings/city-yuanling-02.jpg', width: 1415, height: 2000 },
+        'city-yuanling-03': { src: 'assets/images/drawings/city-yuanling-03.jpg', width: 1413, height: 2000 },
+        'city-yuanling-04': { src: 'assets/images/drawings/city-yuanling-04.jpg', width: 1415, height: 2000 },
+        'city-yuanling-05': { src: 'assets/images/drawings/city-yuanling-05.jpg', width: 1415, height: 2000 },
+        'city-yuanling-06': { src: 'assets/images/drawings/city-yuanling-06.jpg', width: 1415, height: 2000 },
+        'city-yuanling-07': { src: 'assets/images/drawings/city-yuanling-07.jpg', width: 1415, height: 2000 },
+        'city-yuanling-08': { src: 'assets/images/drawings/city-yuanling-08.jpg', width: 1415, height: 2000 },
+        'city-yuanling-09': { src: 'assets/images/drawings/city-yuanling-09.jpg', width: 1415, height: 2000 },
+        'ai-urban-science-poster': { src: 'assets/images/ai/urban-science-poster.jpg', width: 1258, height: 1800 },
+        'ai-hri-preview': { src: 'assets/images/ai/hri-dashboard-preview.png', width: 1440, height: 900 }
+      });
+      drawingData.galleries.city = {
+        intro: '园岭新村改造设计共提供 9 张图纸，覆盖城市、商住、学校与住宅四个层级。点击任意图纸可查看大图细节。',
+        drawings: [
+          { asset: 'city-yuanling-01', title: '城市更新 · 总体策略', description: '园岭片区更新的城市尺度研究。' },
+          { asset: 'city-yuanling-02', title: '城市更新 · 空间网络', description: '梳理校地、街巷与公共空间的连接关系。' },
+          { asset: 'city-yuanling-03', title: '城市更新 · 场景与系统', description: '以日常使用组织慢行、停留与服务界面。' },
+          { asset: 'city-yuanling-04', title: '商住更新 · 空间重组', description: '商住混合单元的更新策略与空间组织。' },
+          { asset: 'city-yuanling-05', title: '商住更新 · 运营界面', description: '面向日常经营和居住使用的细部表达。' },
+          { asset: 'city-yuanling-06', title: '校园更新 · 校地共享', description: '校园与周边住区之间的开放空间方案。' },
+          { asset: 'city-yuanling-07', title: '校园更新 · 学习场景', description: '学习、活动与公共交流场所的场景呈现。' },
+          { asset: 'city-yuanling-08', title: '住宅更新 · 户型与公共空间', description: '住区单元与共享空间的改造设计。' },
+          { asset: 'city-yuanling-09', title: '住宅更新 · 居住单元细部', description: '住宅单元的空间细节与使用关系。' }
+        ],
+        boards: []
+      };
+      drawingData.galleries.aipin.boards = [
+        { asset: 'aipin-full-01', title: '适老宅 · 完整展板 01 / 06', description: '适老宅方案图纸 · 点击查看细节' },
+        { asset: 'aipin-full-02', title: '适老宅 · 完整展板 02 / 06', description: '适老宅方案图纸 · 点击查看细节' },
+        { asset: 'aipin-full-03', title: '适老宅 · 完整展板 03 / 06', description: '适老宅方案图纸 · 点击查看细节' },
+        { asset: 'aipin-full-04', title: '适老宅 · 完整展板 04 / 06', description: '适老宅方案图纸 · 点击查看细节' },
+        { asset: 'aipin-full-05', title: '住区更新 · 完整展板 05 / 06', description: '住区方案图纸 · 点击查看细节' },
+        { asset: 'aipin-full-06', title: '住区更新 · 完整展板 06 / 06', description: '住区方案图纸 · 点击查看细节' }
+      ];
+      drawingData.galleries['urban-science'] = {
+        heading: '会议成果',
+        intro: '第 4 届国际城市科学与智能会议的研究海报，呈现深圳高温下公共避难空间的热安全可达性框架与核心发现。',
+        drawings: [
+          { asset: 'ai-urban-science-poster', title: '热安全可达性 · 深圳研究海报', description: 'From Nearby to Reachable: Heat-Safe Accessibility to Public Cooling Refuges in Shenzhen。' }
+        ],
+        boards: []
+      };
       const drawingViewer = document.createElement('dialog');
       drawingViewer.className = 'drawing-viewer';
       drawingViewer.setAttribute('aria-labelledby', 'drawing-viewer-title');
@@ -506,6 +564,7 @@
             },
             {
               id: 'city', nav: '城市设计', number: '04 / PROJECT', title: '园岭共建 OS', type: '城市微更新 · 街区协同系统',
+              image: 'assets/images/drawings/city-yuanling-aerial.png', imageAlt: '园岭新村改造设计鸟瞰图',
               visualTitle: '园岭共建 OS', visualItems: ['安全学径', 'Citywalk 路线', '模块更新', '运营闭环'],
               summary: '基于“全时街区，生活共建”的城市更新方案，以安全学径建立日常高频，用路线内容和空间共享激活街区，并以轻量工具沉淀持续运营能力。',
               facts: [['服务对象', '学生、住户、商户、学校、运营者'], ['空间策略', '学径、街道、住宅与校地共享'], ['产品定位', '线下空间 + 线上协同']],
@@ -531,7 +590,41 @@
             }
           ]
         },
-        '03': { kicker: '03 / 教育背景', title: '教育背景', intro: '此处为占位内容，待用户替换为真实简历内容。可添加学校、专业、时间、荣誉或与目标岗位相关的课程成果。', items: [['学校 / 专业', '待替换：学校、院系与专业'], ['学习时间', '待替换：入学与毕业时间'], ['代表成果', '待替换：奖项、论文或课程项目']] },
+        '03': {
+          kicker: '03 / AI作品',
+          title: 'AI作品',
+          projectOrder: ['urban-science', 'hri-platform'],
+          projects: [
+            {
+              id: 'urban-science', nav: 'AI 城市智能会议', number: '01 / AI PROJECT', title: '热安全可达性研究', type: '第4届国际城市科学与智能会议 · 深圳试点',
+              image: 'assets/images/ai/urban-science-poster.jpg', imageFit: 'contain', imageAlt: '深圳公共避难空间热安全可达性研究海报',
+              summary: '从“附近”推进到“可达”，将避难空间开放状态、步行路网、路线热暴露与到达后的可使用性放入同一套城市尺度分析框架。',
+              links: [['会议报道 01', 'https://mp.weixin.qq.com/s/wb6UPNmwMu0oycVGM2cu2Q'], ['会议报道 02', 'https://mp.weixin.qq.com/s/Gw_uwvHN0aPoc-3HoQ5tvg']],
+              facts: [['研究范围', '深圳 10 区'], ['评价方式', '15分钟步行 × UTCI'], ['核心发现', '124万人受热约束']],
+              sections: [
+                { title: '研究问题', copy: '常见可达性指标只看距离或时间，却忽略到达避难空间的路径本身可能暴露于高温中。研究将目的地、路网、热暴露和使用条件串联，识别“名义可达”与“热安全可达”之间的差距。', points: ['将开放状态、真实步行路径、热负荷与到达后的使用条件纳入判断', '把距离上的覆盖与实际可获得的降温保护分开评估'] },
+                { title: '方法与数据', copy: '研究构建深圳全域可复现的空间分析流程，结合公共图书馆地址、步行路网、气象、地表温度、人口与老龄化数据，在路线层面对避难空间进行热安全筛查。', points: ['以 UTCI 评估遮阴、半日照和全日照情景下的步行热压力', '用网络最短路计算 15 分钟内可达到的常规室内避难空间', '以人口加权方式比较不同城区的名义可达、热安全可达与热约束状态'] },
+                { title: '研究成果', copy: '在 15 分钟、1.2 m/s 的情景中，图书馆单一网络的名义覆盖率为 34.1%。加入公共和商业室内候选空间后提升至 56.7%。当路线筛查阈值设为 UTCI 38°C 时，124 万名居民虽处于名义覆盖范围内，仍受到热暴露约束。', points: ['遮阴、半日照和全日照情景下的 UTCI 分别为 35.2°C、38.4°C 和 41.7°C', '研究以路线热暴露识别空间资源不足与到达过程受热两类不同问题'] }
+              ],
+              flow: [['设施建模', '梳理避难空间的功能与开放条件'], ['路网测算', '计算真实步行时间与最近目的地'], ['热暴露校正', '以 UTCI 筛查路线热压力'], ['空间诊断', '识别城区差异与干预重点']],
+              note: '成果包括会议论文《From Nearby to Reachable: Heat-Safe Accessibility to Public Cooling Refuges in Shenzhen》及研究海报。'
+            },
+            {
+              id: 'hri-platform', nav: 'AI 城市热风险平台', number: '02 / AI PROJECT', title: 'AI 城市热风险平台', type: '城市热风险识别 · 空间决策支持界面',
+              image: 'assets/images/ai/hri-dashboard-preview.png', imageAlt: 'AI 城市热风险平台界面预览',
+              summary: '以城市尺度热风险仪表盘组织高温危险、人口暴露与响应信息，让复杂的空间数据能够被快速浏览、定位和讨论。',
+              links: [['打开热风险平台', 'https://zhang-create956.github.io/hri-dashboard/']],
+              facts: [['呈现范围', '深圳城市尺度'], ['信息结构', '危险 · 暴露 · 响应'], ['交互形式', '实时风险仪表盘']],
+              sections: [
+                { title: '产品定位', copy: '平台面向城市高温风险的快速研判，将热环境数据与空间风险信息转化为清晰的决策界面，支持从城市概览进入重点区域的进一步查看。', points: ['在同一界面呈现高温危险因子、暴露水平与响应状态', '以地图和指标联动降低空间数据的阅读门槛'] },
+                { title: '界面结构', copy: '首页以深圳城市尺度为入口，围绕高温危险指数、暴露指数、脆弱性与适应能力构建分层信息结构，并保留风险评分和地图视图的联动关系。', points: ['危险层关注地表温度、热岛强度与空气滞留', '暴露层聚焦高温暴露情况与重点片区', '响应层用于查看脆弱性与适应能力信息'] },
+                { title: '作品体验', copy: '作品以可交互网页形式呈现，可直接进入平台查看完整地图、指标与动态效果。', points: ['在网页端访问完整交互成果', '可作为热风险研究与空间设计沟通的可视化入口'] }
+              ],
+              flow: [['数据接入', '组织热环境与空间基础数据'], ['空间识别', '定位危险、暴露与脆弱区域'], ['风险研判', '联动指标与地图形成判断'], ['界面响应', '进入平台查看重点片区']],
+              note: '平台为交互式可视化作品，具体风险阈值与空间结论应结合实时数据和专业研究进一步核验。'
+            }
+          ]
+        },
         '04': { kicker: '04 / 联系方式', title: '联系方式', intro: '此处为占位内容，待用户替换为真实简历内容。发布到公开站点前，请确认是否需要展示手机号、邮箱等个人信息。', items: [['邮箱', '待替换：your.name@example.com'], ['所在地', '待替换：城市 / 意向城市'], ['其他链接', '待替换：作品集、GitHub 或社交主页']] }
       };
       let activeKey = 'base';
@@ -583,10 +676,12 @@
       }
 
       function renderProjectGallery(item) {
-        const shell = document.createElement('section'); shell.className = 'competition-shell';
-        const nav = document.createElement('nav'); nav.className = 'competition-nav'; nav.setAttribute('aria-label', '竞赛项目导航'); nav.setAttribute('role', 'tablist');
+       const shell = document.createElement('section'); shell.className = 'competition-shell';
+        const nav = document.createElement('nav'); nav.className = 'competition-nav'; nav.setAttribute('aria-label', `${item.title}项目导航`); nav.setAttribute('role', 'tablist');
         const panelHost = document.createElement('div');
-        item.projects = ['ismart', 'aipin', 'goodhome', 'city'].map(id => item.projects.find(project => project.id === id)).filter(Boolean);
+        const projectOrder = item.projectOrder || item.projects.map(project => project.id);
+        const projects = projectOrder.map(id => item.projects.find(project => project.id === id)).filter(Boolean);
+        nav.style.setProperty('--project-count', String(projects.length || 1));
         const buttons = new Map();
 
         const renderPanel = project => {
@@ -604,6 +699,8 @@
             expandButton.addEventListener('click', () => { const expanded = media.classList.toggle('is-expanded'); expandButton.textContent = expanded ? '收起演示' : '展开演示'; expandButton.setAttribute('aria-pressed', String(expanded)); });
             mediaBar.append(mediaStatus, expandButton); media.append(mediaBar);
 
+          } else if (project.image) {
+            const image = document.createElement('img'); image.className = 'project-image'; if (project.imageFit === 'contain') image.classList.add('is-poster'); image.src = project.image; image.alt = project.imageAlt || project.title; image.loading = 'eager'; image.decoding = 'async'; media.append(image);
           } else {
             const visual = document.createElement('div'); visual.className = 'project-visual';
             const visualTitle = document.createElement('strong'); visualTitle.textContent = project.visualTitle; visual.append(visualTitle);
@@ -615,7 +712,13 @@
           const title = document.createElement('h3'); title.textContent = project.title;
           const type = document.createElement('p'); type.className = 'project-type'; type.textContent = project.type;
           const summary = document.createElement('p'); summary.className = 'project-summary'; summary.textContent = project.summary;
-          brief.append(eyebrow, title, type, summary); hero.append(media, brief); panel.append(hero);
+          brief.append(eyebrow, title, type, summary);
+          if (project.links?.length) {
+            const actions = document.createElement('div'); actions.className = 'project-actions';
+            project.links.forEach(([label, href]) => { const link = document.createElement('a'); link.href = href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = label; actions.append(link); });
+            brief.append(actions);
+          }
+          hero.append(media, brief); panel.append(hero);
 
           const facts = document.createElement('ul'); facts.className = 'project-facts';
           project.facts.forEach(([label, value]) => { const fact = document.createElement('li'); fact.className = 'project-fact'; const factLabel = document.createElement('b'); factLabel.textContent = label; const factValue = document.createElement('span'); factValue.textContent = value; fact.append(factLabel, factValue); facts.append(fact); });
@@ -634,14 +737,14 @@
         };
 
         const activateProject = id => {
-          const project = item.projects.find(candidate => candidate.id === id) || item.projects[0];
+          const project = projects.find(candidate => candidate.id === id) || projects[0];
           buttons.forEach((button, buttonId) => { const active = buttonId === project.id; button.classList.toggle('is-active', active); button.setAttribute('aria-selected', String(active)); button.tabIndex = active ? 0 : -1; });
           renderPanel(project);
         };
 
-        item.projects.forEach(project => { const button = document.createElement('button'); button.type = 'button'; button.className = 'competition-tab'; button.id = `project-tab-${project.id}`; button.setAttribute('role', 'tab'); button.setAttribute('aria-controls', `project-panel-${project.id}`); button.textContent = project.nav; button.addEventListener('click', () => activateProject(project.id));
+        projects.forEach(project => { const button = document.createElement('button'); button.type = 'button'; button.className = 'competition-tab'; button.id = `project-tab-${project.id}`; button.setAttribute('role', 'tab'); button.setAttribute('aria-controls', `project-panel-${project.id}`); button.textContent = project.nav; button.addEventListener('click', () => activateProject(project.id));
           button.addEventListener('keydown', event => {
-            const ids = item.projects.map(entry => entry.id); const current = ids.indexOf(project.id);
+            const ids = projects.map(entry => entry.id); const current = ids.indexOf(project.id);
             let next = -1;
             if (event.key === 'ArrowRight') next = (current + 1) % ids.length;
             else if (event.key === 'ArrowLeft') next = (current - 1 + ids.length) % ids.length;
@@ -650,7 +753,7 @@
             if (next >= 0) { event.preventDefault(); activateProject(ids[next]); buttons.get(ids[next]).focus(); }
           });
           buttons.set(project.id, button); nav.append(button); });
-        shell.append(nav, panelHost); modalContent.append(shell); activateProject(item.projects[0].id);
+        shell.append(nav, panelHost); modalContent.append(shell); activateProject(projects[0].id);
       }
       function fillModal(key) {
         const item = details[key];
