@@ -331,6 +331,7 @@
         'city-yuanling-08': { src: 'assets/images/drawings/city-yuanling-08.jpg', width: 1415, height: 2000 },
         'city-yuanling-09': { src: 'assets/images/drawings/city-yuanling-09.jpg', width: 1415, height: 2000 },
         'ai-urban-science-poster': { src: 'assets/images/ai/urban-science-poster.jpg', width: 1258, height: 1800 },
+        'aipin-team-award': { src: 'assets/images/drawings/aipin-team-award.jpg', width: 1280, height: 853 },
         'ai-hri-preview': { src: 'assets/images/ai/hri-dashboard-preview.png', width: 1440, height: 900 }
       });
       drawingData.galleries.city = {
@@ -356,6 +357,11 @@
         { asset: 'aipin-full-05', title: '住区更新 · 完整展板 05 / 06', description: '住区方案图纸 · 点击查看细节' },
         { asset: 'aipin-full-06', title: '住区更新 · 完整展板 06 / 06', description: '住区方案图纸 · 点击查看细节' }
       ];
+      drawingData.galleries.aipin.drawings.push({
+        asset: 'aipin-team-award',
+        title: '团队获奖 · 专项奖成果展示',
+        description: '2024 年度首届居家适老化改造设计创意大赛成果发布大会。'
+      });
       drawingData.galleries['urban-science'] = {
         heading: '会议成果',
         intro: '第 4 届国际城市科学与智能会议的研究海报，呈现深圳高温下公共避难空间的热安全可达性框架与核心发现。',
@@ -541,6 +547,7 @@
               id: 'aipin', nav: '爱拼公寓', number: '02 / PROJECT', title: '爱拼公寓', type: '适老化合租 · AI 共创改造助手',
               video: 'assets/video/aipin-apartment.mp4', videoLabel: '适老化改造方案演示',
               summary: '以深圳低龄老年打工者合租为场景，把空间改造转译为“调研材料输入—风险与冲突识别—共识生成—模块化方案—交付物输出”的 AI 共创工作台。',
+              links: [['赛事报道 01', 'https://mp.weixin.qq.com/s/013RmhPq4dz1NyEw1fQswA'], ['赛事报道 02', 'https://mp.weixin.qq.com/s/NPu84utnU5wthqfuWcgOSg']],
               facts: [['核心人群', '低龄老年合租住户'], ['设计场景', '户内 + 住区公共空间'], ['方案定位', '可追溯的共创改造流程']],
               sections: [
                 { title: '项目背景与成果', copy: '项目由清华大学与国家老年人协会举办，围绕老年友好型合租居住展开空间与服务协同设计，最终获得专项奖。', points: ['主办方：清华大学 × 国家老年人协会', '竞赛成果：专项奖'] },
