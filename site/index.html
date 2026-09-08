@@ -276,11 +276,11 @@
 
     <section class="experience" id="experience" aria-label="个人档案馆互动简历">
       <div class="stage" id="stage">
-        <img class="visual base" id="visualBase" src="assets/images/resume-base.png" alt="个人档案馆简历主界面">
-        <img class="visual fx" id="visual01" src="assets/images/resume-fx-01.png" alt="个人经历交互效果" decoding="async">
-        <img class="visual fx" id="visual02" src="assets/images/resume-fx-02.png" alt="竞赛作品交互效果" decoding="async">
-        <img class="visual fx" id="visual03" src="assets/images/resume-fx-03.png" alt="AI 作品交互效果" decoding="async">
-        <img class="visual fx" id="visual04" src="assets/images/resume-fx-04.png" alt="生活交互效果" decoding="async">
+        <img class="visual base" id="visualBase" data-src="assets/images/resume-base.png" alt="个人档案馆简历主界面" decoding="async">
+        <img class="visual fx" id="visual01" data-src="assets/images/resume-fx-01.png" alt="个人经历交互效果" decoding="async">
+        <img class="visual fx" id="visual02" data-src="assets/images/resume-fx-02.png" alt="竞赛作品交互效果" decoding="async">
+        <img class="visual fx" id="visual03" data-src="assets/images/resume-fx-03.png" alt="AI 作品交互效果" decoding="async">
+        <img class="visual fx" id="visual04" data-src="assets/images/resume-fx-04.png" alt="生活交互效果" decoding="async">
 
         <div class="card-layer" id="cardLayer" aria-label="简历分类导航">
           <button class="card-ui card-1" type="button" data-key="01" data-label="项目经历" aria-label="项目经历：悬停查看效果，点击查看详情"></button>
@@ -650,11 +650,31 @@
       let lastFocused = null;
       let leaveTimer = null;
 
-      // 提前触发图片解码，减少视频结束后的首帧与悬停切换延迟。
-      Object.values(visuals).forEach(image => { if (image.decode) image.decode().catch(() => {}); });
+      // 开场阶段只请求视频。简历底图在视频结束/跳过后加载，悬停图在底图就绪后再预取。
+      const visualLoads = new Map();
+      function loadVisual(key) {
+        const image = visuals[key];
+        if (!image) return Promise.resolve();
+        if (visualLoads.has(key)) return visualLoads.get(key);
+        const source = image.dataset.src;
+        if (source && !image.getAttribute('src')) image.src = source;
+        const load = image.decode ? image.decode().catch(() => {}) : Promise.resolve();
+        visualLoads.set(key, load);
+        return load;
+      }
+
+      function preloadHoverVisuals() {
+        ['01', '02', '03', '04'].forEach(key => {
+          window.setTimeout(() => { loadVisual(key); }, 0);
+        });
+      }
 
       function activate(key) {
         if (!visuals[key] || key === activeKey) return;
+        if (key !== 'base' && (!visuals[key].getAttribute('src') || !visuals[key].complete)) {
+          loadVisual(key).then(() => activate(key));
+          return;
+        }
         const previous = activeKey === 'base' ? null : visuals[activeKey];
         if (previous) previous.classList.remove('is-visible', 'is-entering');
         if (key !== 'base') {
@@ -673,10 +693,14 @@
 
       function enterResume() {
         if (app.classList.contains('resume-visible')) return;
-        app.classList.add('resume-visible');
-        intro.classList.add('is-leaving');
-        startHint.classList.remove('is-visible');
         video.pause();
+        // 保留视频最后一帧，直到底图成功解码，避免在弱网下出现白屏或黑屏。
+        loadVisual('base').then(() => {
+          app.classList.add('resume-visible');
+          intro.classList.add('is-leaving');
+          startHint.classList.remove('is-visible');
+          preloadHoverVisuals();
+        });
       }
 
       function tryAutoplay() {
